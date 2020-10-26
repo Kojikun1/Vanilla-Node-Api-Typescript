@@ -1,1 +1,1 @@
-### Api made with Vanilla Node withou any framework (Express)
+### Api made with Vanilla Node without any framework (Express)

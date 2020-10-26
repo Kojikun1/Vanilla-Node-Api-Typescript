@@ -12,5 +12,11 @@ function findAll(){
           resolve(products);
       })
 }
+function findById(id: string){
+    return new Promise<Product>((resolve,reject)=> {
+        const productById = products.find( item => item.id === id);
+        resolve(productById);
+    })
+}
 
-export default { findAll };
+export default { findAll, findById };

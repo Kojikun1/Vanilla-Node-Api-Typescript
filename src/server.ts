@@ -16,11 +16,10 @@ const server = http.createServer((req,res)=> {
         }else if(req.url?.match(/\/api\/products\/([0-9]+)/)) {
             const id = req.url.split('/');
             productController.getProductsById(req,res, id[id.length -1]);
+        }else{
+            res.writeHead(404,{'Content-Type': "application/json"});
+            res.end(JSON.stringify({message: "Not Found"}));
         }
-    }
-    else{
-        res.writeHead(404,{'Content-Type': "application/json"});
-        res.end(JSON.stringify({message: "Not Found"}));
     }
 });
 

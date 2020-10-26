@@ -12,11 +12,16 @@ import {IncomingMessage, ServerResponse} from 'http';
     }
  }
  async getProductsById(req: IncomingMessage, res: ServerResponse, id: string){
-    const products = await Product.findAll();
+    const product = await Product.findById(id);
+
     try {
-        const productById = products.filter( item => item.id === id);
-       res.writeHead(200,{'Content-Type': "application/json"});
-       res.end(JSON.stringify(productById));
+        if(!product){
+            res.writeHead(404,{'Content-Type': "application/json"});
+           res.end(JSON.stringify({message: "Product Not Found"}));
+        }else{
+            res.writeHead(200,{'Content-Type': "application/json"});
+            res.end(JSON.stringify(product));
+        }   
     } catch (error) {
         console.log(error);
     }
