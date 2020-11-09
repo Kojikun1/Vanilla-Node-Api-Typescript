@@ -26,6 +26,36 @@ import {IncomingMessage, ServerResponse} from 'http';
         console.log(error);
     }
  }
+ async createNewProduct(req: IncomingMessage, res: ServerResponse){
+     const product = {
+         id: "",
+         name: "PlayStation 5",
+         description: "New Sony game console ps5",
+         price: 499.99
+     }
+    const newProduct = await Product.create(product);
+   
+     try {
+        res.writeHead(200,{'Content-Type': "application/json"});
+        res.end(JSON.stringify(newProduct)); 
+
+     } catch (error) {
+         console.log(error);
+     }   
+ }
+ async deleteProduct(req: IncomingMessage, res: ServerResponse,id: string){
+
+   const deleted_product = await Product.remove(id);
+  
+    try {
+       res.writeHead(200,{'Content-Type': "application/json"});
+       res.end(JSON.stringify({product: deleted_product, message: "Successful Delete"})); 
+
+    } catch (error) {
+        console.log(error);
+    }   
+}
+
 }
 
 export default ProductController;
